@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrendPulse AI — Keyword Intelligence Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <canvas id="particleCanvas"></canvas>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-glow"></div>
+      <div class="logo-icon">
+        <svg viewBox="0 0 32 32" fill="none"><path d="M16 2L4 18h8l-2 12 14-16h-8l2-12z" fill="url(#logoGrad)" stroke="none"/><defs><linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32"><stop offset="0%" stop-color="#00BFFF"/><stop offset="100%" stop-color="#8A5CFF"/></linearGradient></defs></svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-title">TrendPulse</span>
+        <span class="logo-badge">AI</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" id="sidebarNav">
+      <a class="nav-item active" data-tab="dashboard"><span class="nav-icon">◈</span><span class="nav-label">Dashboard</span><span class="nav-glow"></span></a>
+      <a class="nav-item" data-tab="radar"><span class="nav-icon">◎</span><span class="nav-label">Trend Radar</span><span class="nav-glow"></span></a>
+      <a class="nav-item" data-tab="youtube"><span class="nav-icon">▶</span><span class="nav-label">YouTube Explorer</span><span class="nav-glow"></span></a>
+      <a class="nav-item" data-tab="google"><span class="nav-icon">🌐</span><span class="nav-label">Google Explorer</span><span class="nav-glow"></span></a>
+      <a class="nav-item" data-tab="keywords"><span class="nav-icon">⚡</span><span class="nav-label">Keyword Lab</span><span class="nav-glow"></span></a>
+      <a class="nav-item" data-tab="seo"><span class="nav-icon">📊</span><span class="nav-label">SEO Analyzer</span><span class="nav-glow"></span></a>
+      <a class="nav-item" data-tab="ai"><span class="nav-icon">◇</span><span class="nav-label">AI Generator</span><span class="nav-glow"></span></a>
+      <a class="nav-item" data-tab="viral"><span class="nav-icon">⟐</span><span class="nav-label">Viral Detector</span><span class="nav-glow"></span></a>
+      <a class="nav-item" data-tab="settings"><span class="nav-icon">⚙</span><span class="nav-label">Settings</span><span class="nav-glow"></span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="status-dot"></div>
+      <span>AI Engine Active</span>
+    </div>
+  </aside>
+
+  <main class="main-content" id="mainContent">
+    <!-- ═══ DASHBOARD ═══ -->
+    <section id="tab-dashboard" class="tab-panel active">
+      <div class="panel-header">
+        <div>
+          <h1 class="panel-title">AI Command Center</h1>
+          <p class="panel-subtitle">Real-time keyword intelligence & trend monitoring</p>
+        </div>
+        <div class="header-actions">
+          <div class="ai-status-badge">
+            <span class="pulse-dot"></span>
+            <span>AI Active</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card glass">
+          <div class="stat-icon" style="--stat-color:#00BFFF">◈</div>
+          <div class="stat-info">
+            <span class="stat-value" id="dashKeywords">0</span>
+            <span class="stat-label">Keywords Analyzed</span>
+          </div>
+          <div class="stat-sparkline" id="sparkline1"></div>
+        </div>
+        <div class="stat-card glass">
+          <div class="stat-icon" style="--stat-color:#8A5CFF">◎</div>
+          <div class="stat-info">
+            <span class="stat-value" id="dashTrends">0</span>
+            <span class="stat-label">Active Trends</span>
+          </div>
+          <div class="stat-sparkline" id="sparkline2"></div>
+        </div>
+        <div class="stat-card glass">
+          <div class="stat-icon" style="--stat-color:#00FFF0">◆</div>
+          <div class="stat-info">
+            <span class="stat-value" id="dashScore">92</span>
+            <span class="stat-label">AI Confidence</span>
+          </div>
+          <div class="stat-sparkline" id="sparkline3"></div>
+        </div>
+        <div class="stat-card glass">
+          <div class="stat-icon" style="--stat-color:#FF6B9D">⟐</div>
+          <div class="stat-info">
+            <span class="stat-value" id="dashVelocity">+1.2k</span>
+            <span class="stat-label">Trend Velocity</span>
+          </div>
+          <div class="stat-sparkline" id="sparkline4"></div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="dash-panel glass" style="grid-area: chart1">
+          <div class="panel-label">Search Interest <span class="live-badge">LIVE</span></div>
+          <canvas id="dashChart1" height="180"></canvas>
+        </div>
+        <div class="dash-panel glass" style="grid-area: chart2">
+          <div class="panel-label">Trend Distribution</div>
+          <canvas id="dashChart2" height="180"></canvas>
+        </div>
+        <div class="dash-panel glass" style="grid-area: feed">
+          <div class="panel-label">Live Keyword Feed</div>
+          <div class="live-feed" id="liveFeed">
+            <div class="feed-item"><span class="feed-keyword">AI tools 2026</span><span class="feed-badge rising">Rising</span></div>
+            <div class="feed-item"><span class="feed-keyword">Python automation</span><span class="feed-badge trending">Trending</span></div>
+            <div class="feed-item"><span class="feed-keyword">YouTube shorts ideas</span><span class="feed-badge viral">Viral</span></div>
+            <div class="feed-item"><span class="feed-keyword">SEO optimization</span><span class="feed-badge rising">Rising</span></div>
+            <div class="feed-item"><span class="feed-keyword">machine learning</span><span class="feed-badge trending">Trending</span></div>
+          </div>
+        </div>
+        <div class="dash-panel glass" style="grid-area: trends">
+          <div class="panel-label">Top Trends Now</div>
+          <div id="dashTrendList">
+            <div class="mini-trend"><span class="mini-rank">1</span> AI revolution</div>
+            <div class="mini-trend"><span class="mini-rank">2</span> Python 2026</div>
+            <div class="mini-trend"><span class="mini-rank">3</span> digital nomad</div>
+            <div class="mini-trend"><span class="mini-rank">4</span> crypto news</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TREND RADAR ═══ -->
+    <section id="tab-radar" class="tab-panel">
+      <div class="panel-header">
+        <div>
+          <h1 class="panel-title">Trend Radar</h1>
+          <p class="panel-subtitle">Real-time trend detection & audience intelligence</p>
+        </div>
+        <div class="header-actions">
+          <select id="radarCountry" class="cyber-select">
+            <option value="">Worldwide</option>
+            <option value="US">United States</option>
+            <option value="MA">Morocco</option>
+            <option value="FR">France</option>
+            <option value="GB">United Kingdom</option>
+            <option value="DE">Germany</option>
+            <option value="IN">India</option>
+            <option value="JP">Japan</option>
+          </select>
+          <button class="cyber-btn" onclick="fetchRadar()">⟳ Scan Trends</button>
+        </div>
+      </div>
+      <div class="radar-grid">
+        <div class="radar-scanner glass">
+          <div class="radar-circle"><div class="radar-sweep"></div><div class="radar-dot" style="top:30%;left:45%"></div><div class="radar-dot" style="top:55%;left:30%"></div><div class="radar-dot" style="top:65%;left:65%"></div><div class="radar-dot" style="top:20%;left:70%"></div></div>
+          <div class="radar-label">Scanning Trends...</div>
+        </div>
+        <div class="radar-results glass" id="radarResults">
+          <div class="panel-label">Detected Trends</div>
+          <div class="radar-placeholder">Select a country and click "Scan Trends"</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ YOUTUBE EXPLORER ═══ -->
+    <section id="tab-youtube" class="tab-panel">
+      <div class="panel-header">
+        <div>
+          <h1 class="panel-title">YouTube Intelligence</h1>
+          <p class="panel-subtitle">SEO scores, tag extraction, title optimization & trend detection</p>
+        </div>
+        <div class="header-actions">
+          <div class="ai-status-badge"><span class="pulse-dot"></span><span>YouTube API</span></div>
+        </div>
+      </div>
+      <div class="tool-grid">
+        <div class="tool-card glass">
+          <div class="tool-tabs">
+            <button class="tool-tab active" onclick="switchYTTab('seo',this)">SEO Analyzer</button>
+            <button class="tool-tab" onclick="switchYTTab('trending',this)">Trending</button>
+            <button class="tool-tab" onclick="switchYTTab('tags',this)">Tags Generator</button>
+            <button class="tool-tab" onclick="switchYTTab('hashtags',this)">Hashtags</button>
+            <button class="tool-tab" onclick="switchYTTab('thumbnail',this)">Thumbnail Ideas</button>
+          </div>
+          <div class="tool-body">
+            <div class="yt-panel active" id="yt-seo">
+              <div class="input-row"><input type="text" id="ytSeoInput" placeholder="Enter a topic (e.g. 'python tutorial')" class="cyber-input"><button class="cyber-btn" onclick="ytSEO()">⟳ Analyze SEO</button></div>
+              <div id="ytSeoResults"></div>
+            </div>
+            <div class="yt-panel" id="yt-trending">
+              <div class="input-row">
+                <select id="ytTrendCat" class="cyber-select"><option value="0">All Categories</option><option value="20">Gaming</option><option value="28">Science & Tech</option><option value="10">Music</option><option value="22">People & Vlogs</option><option value="23">Comedy</option><option value="24">Entertainment</option><option value="25">News & Politics</option></select>
+                <button class="cyber-btn" onclick="ytTrending()">⟳ Get Trending</button>
+              </div>
+              <div id="ytTrendResults"></div>
+            </div>
+            <div class="yt-panel" id="yt-tags">
+              <div class="input-row"><input type="text" id="ytTagsInput" placeholder="Enter a keyword for tags" class="cyber-input"><button class="cyber-btn" onclick="ytTags()">⟳ Generate Tags</button></div>
+              <div id="ytTagsResults"></div>
+            </div>
+            <div class="yt-panel" id="yt-hashtags">
+              <div class="input-row"><input type="text" id="ytHashtagInput" placeholder="Enter a topic" class="cyber-input"><button class="cyber-btn" onclick="ytHashtags()">⟳ Generate #</button></div>
+              <div id="ytHashtagResults"></div>
+            </div>
+            <div class="yt-panel" id="yt-thumbnail">
+              <div class="input-row"><input type="text" id="ytThumbInput" placeholder="Enter a topic for thumbnail ideas" class="cyber-input"><button class="cyber-btn" onclick="ytThumbnail()">⟳ Generate Ideas</button></div>
+              <div id="ytThumbResults"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ GOOGLE EXPLORER ═══ -->
+    <section id="tab-google" class="tab-panel">
+      <div class="panel-header">
+        <div>
+          <h1 class="panel-title">Google Search Intelligence</h1>
+          <p class="panel-subtitle">Autocomplete, related queries & search volume analytics</p>
+        </div>
+        <div class="header-actions">
+          <button class="cyber-btn" onclick="document.getElementById('googleInput').focus()">⟳ New Search</button>
+        </div>
+      </div>
+      <div class="input-row" style="margin-bottom:1.5rem"><input type="text" id="googleInput" placeholder="Enter any keyword (e.g. 'AI tools 2026')" class="cyber-input"><select id="googleSource" class="cyber-select"><option value="both">Both</option><option value="youtube">YouTube</option><option value="google">Google</option></select><button class="cyber-btn" onclick="googleExplore()">⟳ Explore</button></div>
+      <div class="google-grid">
+        <div class="google-panel glass"><div class="panel-label">YouTube Suggestions</div><div id="googleYtResults"></div></div>
+        <div class="google-panel glass"><div class="panel-label">Google Suggestions</div><div id="googleGResults"></div></div>
+      </div>
+      <div class="google-panel glass" style="margin-top:1rem"><div class="panel-label">Scored Keywords</div><div id="googleScored"></div></div>
+    </section>
+
+    <!-- ═══ KEYWORD LAB ═══ -->
+    <section id="tab-keywords" class="tab-panel">
+      <div class="panel-header">
+        <div>
+          <h1 class="panel-title">Keyword Lab</h1>
+          <p class="panel-subtitle">Expander, Combiner, Bulk Scorer & Niche Finder</p>
+        </div>
+        <div class="header-actions">
+          <div class="ai-status-badge"><span class="pulse-dot"></span><span>Algorithms Ready</span></div>
+        </div>
+      </div>
+      <div class="kw-tabs">
+        <button class="kw-tab active" onclick="switchKWTab('expander',this)">🔠 Expander</button>
+        <button class="kw-tab" onclick="switchKWTab('combiner',this)">🔗 Combiner</button>
+        <button class="kw-tab" onclick="switchKWTab('scorer',this)">📊 Bulk Scorer</button>
+        <button class="kw-tab" onclick="switchKWTab('niche',this)">💎 Niche Finder</button>
+        <button class="kw-tab" onclick="switchKWTab('compare',this)">⚖️ Comparator</button>
+      </div>
+      <div class="kw-panel active" id="kw-expander">
+        <div class="input-row"><input type="text" id="expInput" placeholder="Seed keyword (e.g. 'python')" class="cyber-input"><select id="expSource" class="cyber-select"><option value="youtube">YouTube</option><option value="google">Google</option><option value="both">Both</option></select><button class="cyber-btn" onclick="kwExpand()">⟳ Expand</button></div>
+        <div id="expResults"></div>
+      </div>
+      <div class="kw-panel" id="kw-combiner">
+        <div class="input-row-vertical">
+          <textarea id="combListA" class="cyber-textarea" placeholder="List A (comma-separated)&#10;e.g. best, top, cheap, free"></textarea>
+          <textarea id="combListB" class="cyber-textarea" placeholder="List B (comma-separated)&#10;e.g. gaming laptop, keyboard, mouse"></textarea>
+          <button class="cyber-btn" onclick="kwCombine()">⟳ Generate Combinations</button>
+        </div>
+        <div id="combResults"></div>
+      </div>
+      <div class="kw-panel" id="kw-scorer">
+        <div class="input-row-vertical">
+          <textarea id="scoreInput" class="cyber-textarea" placeholder="Paste keywords (one per line)&#10;e.g.&#10;gaming setup for beginners&#10;best laptop 2026&#10;how to edit videos"></textarea>
+          <button class="cyber-btn" onclick="kwScore()">⟳ Score All</button>
+        </div>
+        <div id="scoreResults"></div>
+      </div>
+      <div class="kw-panel" id="kw-niche">
+        <div class="input-row"><input type="text" id="nicheInput" placeholder="Broad topic (e.g. 'fitness', 'cooking')" class="cyber-input"><button class="cyber-btn" onclick="kwNiche()">⟳ Find Niches</button></div>
+        <div id="nicheResults"></div>
+      </div>
+      <div class="kw-panel" id="kw-compare">
+        <div class="input-row"><input type="text" id="cmpA" placeholder="Keyword A" class="cyber-input"><input type="text" id="cmpB" placeholder="Keyword B" class="cyber-input"><button class="cyber-btn" onclick="kwCompare()">⚖️ Compare</button></div>
+        <div id="cmpResults"></div>
+      </div>
+    </section>
+
+    <!-- ═══ SEO ANALYZER ═══ -->
+    <section id="tab-seo" class="tab-panel">
+      <div class="panel-header">
+        <div>
+          <h1 class="panel-title">SEO Analyzer</h1>
+          <p class="panel-subtitle">Deep-dive SEO score for your video title, description & tags</p>
+        </div>
+        <div class="header-actions">
+          <button class="cyber-btn" onclick="document.getElementById('seoTitle').focus()">⟳ New Analysis</button>
+        </div>
+      </div>
+      <div class="seo-form glass">
+        <div class="seo-field"><label>Video Title</label><input type="text" id="seoTitle" placeholder="e.g. '10 Python Tricks You NEED to Know [2026]'" class="cyber-input"></div>
+        <div class="seo-field"><label>Video Description</label><textarea id="seoDesc" class="cyber-textarea" placeholder="Paste your video description here..."></textarea></div>
+        <div class="seo-field"><label>Tags (comma-separated)</label><input type="text" id="seoTags" placeholder="tag1, tag2, tag3, ..." class="cyber-input"></div>
+        <button class="cyber-btn" onclick="analyzeSEO()" style="width:100%;margin-top:0.5rem">⟳ Analyze Full SEO</button>
+      </div>
+      <div id="seoResults"></div>
+    </section>
+
+    <!-- ═══ AI GENERATOR ═══ -->
+    <section id="tab-ai" class="tab-panel">
+      <div class="panel-header">
+        <div>
+          <h1 class="panel-title">AI Content Generator</h1>
+          <p class="panel-subtitle">Powered by Gemini — Ideas, Titles, Descriptions, Scripts & Analysis</p>
+        </div>
+        <div class="header-actions">
+          <div class="ai-status-badge" id="aiStatusBadge"><span class="pulse-dot"></span><span>Gemini Ready</span></div>
+        </div>
+      </div>
+      <div class="ai-controls glass">
+        <div class="ai-key-row">
+          <input type="password" id="aiKeyInput" placeholder="Enter your Gemini API Key" class="cyber-input">
+          <button class="cyber-btn" onclick="saveAIKey()">Save Key</button>
+          <span id="aiKeyStatus"></span>
+        </div>
+        <div class="ai-mode-select">
+          <button class="ai-mode-btn active" data-mode="ideas" onclick="switchAIMode('ideas',this)">💡 Ideas</button>
+          <button class="ai-mode-btn" data-mode="title" onclick="switchAIMode('title',this)">✏️ Titles</button>
+          <button class="ai-mode-btn" data-mode="desc" onclick="switchAIMode('desc',this)">📝 Descriptions</button>
+          <button class="ai-mode-btn" data-mode="script" onclick="switchAIMode('script',this)">🎬 Scripts</button>
+          <button class="ai-mode-btn" data-mode="analyze" onclick="switchAIMode('analyze',this)">🔬 Deep Analysis</button>
+        </div>
+        <div class="input-row"><input type="text" id="aiInput" placeholder="Enter your niche or topic..." class="cyber-input"><button class="cyber-btn" onclick="runAI()">⟳ Generate</button></div>
+      </div>
+      <div id="aiResults" class="glass" style="margin-top:1rem;padding:1.5rem;display:none"></div>
+    </section>
+
+    <!-- ═══ VIRAL DETECTOR ═══ -->
+    <section id="tab-viral" class="tab-panel">
+      <div class="panel-header">
+        <div>
+          <h1 class="panel-title">Viral Detector</h1>
+          <p class="panel-subtitle">Predict viral potential, find trending niches & score content ideas</p>
+        </div>
+        <div class="header-actions">
+          <button class="cyber-btn" onclick="scanViral()">⟳ Full Scan</button>
+        </div>
+      </div>
+      <div class="viral-grid">
+        <div class="viral-card glass"><div class="viral-icon">⟐</div><div class="viral-value" id="viralScore">87</div><div class="viral-label">Viral Potential</div><div class="viral-bar"><div class="viral-fill" style="width:87%"></div></div></div>
+        <div class="viral-card glass"><div class="viral-icon">◎</div><div class="viral-value" id="viralMomentum">1.4k</div><div class="viral-label">Momentum Score</div><div class="viral-bar"><div class="viral-fill" style="width:70%"></div></div></div>
+        <div class="viral-card glass"><div class="viral-icon">◆</div><div class="viral-value" id="viralAudience">92%</div><div class="viral-label">Audience Fit</div><div class="viral-bar"><div class="viral-fill" style="width:92%"></div></div></div>
+        <div class="viral-card glass"><div class="viral-icon">◈</div><div class="viral-value" id="viralCompetition">Low</div><div class="viral-label">Competition Level</div><div class="viral-bar"><div class="viral-fill" style="width:30%;background:linear-gradient(90deg,#00FFF0,#00BFFF)"></div></div></div>
+      </div>
+      <div class="viral-input-row"><input type="text" id="viralInput" placeholder="Enter a topic or keyword to check viral potential" class="cyber-input"><button class="cyber-btn" onclick="checkViral()">⟳ Check Viral Score</button></div>
+      <div id="viralResults"></div>
+    </section>
+
+    <!-- ═══ SETTINGS ═══ -->
+    <section id="tab-settings" class="tab-panel">
+      <div class="panel-header">
+        <div>
+          <h1 class="panel-title">Settings</h1>
+          <p class="panel-subtitle">Configure API keys, theme & preferences</p>
+        </div>
+      </div>
+      <div class="settings-grid">
+        <div class="settings-card glass">
+          <h3>▶ YouTube API Key</h3>
+          <p class="settings-desc">Required for YouTube SEO & Trending features</p>
+          <div class="input-row"><input type="password" id="settingsYtKey" placeholder="Enter YouTube Data API v3 key" class="cyber-input"><button class="cyber-btn" onclick="saveYtKey()">Save</button></div>
+          <span id="settingsYtStatus"></span>
+          <a href="https://console.cloud.google.com/apis/credentials" target="_blank" class="settings-link">Get free key →</a>
+        </div>
+        <div class="settings-card glass">
+          <h3>🔑 Gemini API Key</h3>
+          <p class="settings-desc">Required for AI Generator features</p>
+          <div class="input-row"><input type="password" id="settingsGeminiKey" placeholder="Enter Gemini API key" class="cyber-input"><button class="cyber-btn" onclick="saveGeminiKey()">Save</button></div>
+          <span id="settingsGeminiStatus"></span>
+          <a href="https://aistudio.google.com/apikey" target="_blank" class="settings-link">Get free key →</a>
+        </div>
+        <div class="settings-card glass">
+          <h3>🎨 Appearance</h3>
+          <p class="settings-desc">Toggle particle effects & animations</p>
+          <label class="toggle-row"><span>Particle Effects</span><input type="checkbox" id="toggleParticles" checked onchange="toggleParticles()"><span class="toggle-slider"></span></label>
+          <label class="toggle-row"><span>Animations</span><input type="checkbox" id="toggleAnimations" checked onchange="toggleAnimations()"><span class="toggle-slider"></span></label>
+        </div>
+        <div class="settings-card glass">
+          <h3>📊 Export Data</h3>
+          <p class="settings-desc">Export your keyword research data</p>
+          <div class="input-row-vertical">
+            <textarea id="exportData" class="cyber-textarea" placeholder="Your collected keywords will appear here..."></textarea>
+            <div style="display:flex;gap:0.5rem"><button class="cyber-btn" onclick="exportTXT()">Export TXT</button><button class="cyber-btn" onclick="exportCSV()">Export CSV</button><button class="cyber-btn" onclick="exportJSON()">Export JSON</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

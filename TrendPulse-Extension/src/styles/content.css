@@ -1,0 +1,339 @@
+/* Content script styles — injected into YouTube/Google/TikTok pages */
+/* All scoped under .trendpulse-* to avoid conflicts */
+
+/* ─── FAB Panel ─── */
+.trendpulse-fab {
+  all: initial;
+  position: fixed !important;
+  top: 80px !important;
+  right: 20px !important;
+  z-index: 2147483646 !important;
+  width: 320px !important;
+  background: rgba(11, 11, 15, 0.96) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(0, 191, 255, 0.25) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0,191,255,0.1) !important;
+  font-family: "Inter", system-ui, -apple-system, sans-serif !important;
+  color: #fff !important;
+  overflow: hidden !important;
+}
+
+.trendpulse-fab * {
+  all: revert;
+  box-sizing: border-box !important;
+}
+
+.trendpulse-panel-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 12px 16px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+.trendpulse-logo {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 6px !important;
+  background: linear-gradient(135deg, #00BFFF, #8A5CFF) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-family: "Orbitron", monospace !important;
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  color: #fff !important;
+  flex-shrink: 0 !important;
+}
+
+.trendpulse-title {
+  font-family: "Orbitron", monospace !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  background: linear-gradient(90deg, #00BFFF, #00FFF0) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  flex: 1 !important;
+  margin-left: 8px !important;
+}
+
+.trendpulse-close-btn {
+  background: none !important;
+  border: none !important;
+  color: rgba(255,255,255,0.3) !important;
+  font-size: 18px !important;
+  cursor: pointer !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+}
+
+.trendpulse-panel-body {
+  padding: 16px !important;
+}
+
+.trendpulse-score-ring {
+  text-align: center !important;
+  margin-bottom: 16px !important;
+}
+
+.trendpulse-ring {
+  width: 72px !important;
+  height: 72px !important;
+  transform: rotate(-90deg) !important;
+}
+
+.trendpulse-ring-bg {
+  fill: none !important;
+  stroke: rgba(255,255,255,0.06) !important;
+  stroke-width: 3 !important;
+}
+
+.trendpulse-ring-fill {
+  fill: none !important;
+  stroke: #00BFFF !important;
+  stroke-width: 3 !important;
+  stroke-linecap: round !important;
+  filter: drop-shadow(0 0 6px rgba(0,191,255,0.5)) !important;
+}
+
+.trendpulse-ring-text {
+  fill: #fff !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  font-family: "Orbitron", monospace !important;
+  text-anchor: middle !important;
+  dominant-baseline: central !important;
+  transform: rotate(90deg) !important;
+}
+
+.trendpulse-ring-label {
+  font-size: 9px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  color: rgba(255,255,255,0.3) !important;
+  margin-top: 4px !important;
+}
+
+.trendpulse-metrics {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 8px !important;
+  margin-bottom: 16px !important;
+}
+
+.trendpulse-metric {
+  background: rgba(255,255,255,0.03) !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  text-align: center !important;
+}
+
+.trendpulse-metric-label {
+  font-size: 9px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: rgba(255,255,255,0.3) !important;
+  display: block !important;
+  margin-bottom: 4px !important;
+}
+
+.trendpulse-metric-value {
+  font-family: "Orbitron", monospace !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+.trendpulse-tags {
+  margin-bottom: 16px !important;
+}
+
+.trendpulse-tag-cloud {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+}
+
+.trendpulse-tag {
+  padding: 3px 8px !important;
+  background: rgba(0,191,255,0.1) !important;
+  border: 1px solid rgba(0,191,255,0.15) !important;
+  border-radius: 4px !important;
+  font-size: 10px !important;
+  color: rgba(255,255,255,0.7) !important;
+}
+
+.trendpulse-actions {
+  display: flex !important;
+  gap: 8px !important;
+}
+
+.trendpulse-btn {
+  flex: 1 !important;
+  padding: 10px 18px !important;
+  border: none !important;
+  border-radius: 10px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+  white-space: nowrap !important;
+}
+
+.trendpulse-btn-primary {
+  background: linear-gradient(135deg, #00BFFF, #8A5CFF) !important;
+  color: #fff !important;
+  box-shadow: 0 0 20px rgba(0,191,255,0.2) !important;
+}
+
+.trendpulse-btn-secondary {
+  background: rgba(255,255,255,0.08) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* Google Bar */
+.trendpulse-google-bar {
+  all: initial;
+  display: block !important;
+  background: rgba(11,11,15,0.95) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(0,191,255,0.2) !important;
+  border-radius: 12px !important;
+  padding: 14px 16px !important;
+  margin: 12px 0 !important;
+  max-width: 652px !important;
+  font-family: "Inter", system-ui, sans-serif !important;
+  color: #fff !important;
+}
+
+.trendpulse-google-bar * { all: revert; }
+
+.trendpulse-gbar-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-family: "Orbitron", monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+  color: rgba(255,255,255,0.6) !important;
+}
+
+.trendpulse-glogo {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 6px !important;
+  background: linear-gradient(135deg, #00BFFF, #8A5CFF) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 9px !important;
+  color: #fff !important;
+}
+
+.trendpulse-gbar-metrics {
+  display: flex !important;
+  gap: 16px !important;
+}
+
+.trendpulse-gmetric {}
+
+.trendpulse-glabel {
+  font-size: 9px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: rgba(255,255,255,0.3) !important;
+  display: block !important;
+  margin-bottom: 2px !important;
+}
+
+.trendpulse-gvalue {
+  font-family: "Orbitron", monospace !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+/* TikTok overlay */
+.trendpulse-tt-overlay {
+  all: initial;
+  position: fixed !important;
+  top: 100px !important;
+  right: 20px !important;
+  z-index: 2147483646 !important;
+  width: 240px !important;
+  background: rgba(11,11,15,0.96) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(255,45,149,0.3) !important;
+  border-radius: 12px !important;
+  padding: 14px !important;
+  font-family: "Inter", system-ui, sans-serif !important;
+  color: #fff !important;
+}
+
+.trendpulse-tt-overlay * { all: revert; }
+
+.trendpulse-tt-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-family: "Orbitron", monospace !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  margin-bottom: 12px !important;
+  color: rgba(255,255,255,0.6) !important;
+}
+
+.trendpulse-tt-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 6px 0 !important;
+  font-size: 12px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+}
+
+.trendpulse-tt-label { color: rgba(255,255,255,0.5) !important; }
+.trendpulse-tt-val { font-family: "Orbitron", monospace !important; font-weight: 600 !important; }
+
+.trendpulse-tt-tag {
+  padding: 2px 6px !important;
+  background: rgba(255,45,149,0.1) !important;
+  border: 1px solid rgba(255,45,149,0.15) !important;
+  border-radius: 4px !important;
+  font-size: 9px !important;
+  color: #FF2D95 !important;
+}
+
+/* KW badge */
+.trendpulse-kw-badge {
+  all: initial;
+  display: inline-flex !important;
+  gap: 6px !important;
+  align-items: center !important;
+  font-family: "Inter", sans-serif !important;
+}
+
+.trendpulse-kw-score {
+  font-family: "Orbitron", monospace !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #00BFFF !important;
+  background: rgba(11,11,15,0.9) !important;
+  padding: 4px 10px !important;
+  border: 1px solid rgba(0,191,255,0.3) !important;
+  border-radius: 6px !important;
+}
+
+/* Animations */
+.trendpulse-slide-in {
+  animation: trendpulse-slideIn 0.3s ease-out !important;
+}
+
+@keyframes trendpulse-slideIn {
+  from { opacity: 0 !important; transform: translateX(20px) !important; }
+  to { opacity: 1 !important; transform: translateX(0) !important; }
+}

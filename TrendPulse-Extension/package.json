@@ -1,0 +1,67 @@
+{
+  "name": "trendpulse-ai",
+  "version": "3.0.0",
+  "description": "AI-Powered Keyword & Trend Intelligence — YouTube, Google, TikTok Analyzer",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "plasmo dev",
+    "build": "plasmo build",
+    "build:chrome": "plasmo build --target=chrome-mv3",
+    "build:firefox": "plasmo build --target=firefox-mv3",
+    "package": "plasmo package"
+  },
+  "dependencies": {
+    "framer-motion": "^11.15.0",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.0",
+    "sharp": "^0.33.5",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.287",
+    "@types/firefox-webext-browser": "^120.0.4",
+    "@types/node": "^22.10.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "plasmo": "^0.90.5",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.16",
+    "typescript": "^5.7.2"
+  },
+  "manifest": {
+    "name": "TrendPulse AI",
+    "description": "AI-Powered Keyword & Trend Intelligence for YouTube, Google & TikTok",
+    "version": "3.0.0",
+    "permissions": [
+      "storage",
+      "activeTab",
+      "tabs",
+      "notifications",
+      "alarms",
+      "scripting",
+      "sidePanel"
+    ],
+    "host_permissions": [
+      "*://*.youtube.com/*",
+      "*://*.google.com/*",
+      "*://*.tiktok.com/*",
+      "http://localhost:3000/*"
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "assets/*",
+          "fonts/*",
+          "styles/*"
+        ],
+        "matches": [
+          "*://*/*"
+        ]
+      }
+    ]
+  }
+}
